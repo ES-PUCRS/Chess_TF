@@ -1,6 +1,5 @@
 
 //Java default API controls
-import chessmen.Chessman;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,6 +19,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import chessmen.*;
 public class ScreenGx {
 public static final int gPxBorded = UX.gPx - 10;
 public static final int gPyBorded = UX.gPy - 58;
@@ -31,18 +31,17 @@ private Stage s;
 
     public static Scene Save() {
         Picture picture = new Picture("MenuBackground");
-        Scene save;
         GridPane gridMaster = new GridPane();
         GridPane grid = new GridPane();
         grid.add(picture,0,0);
         picture.setOnAction(e -> System.out.println("Try"));
-        return save = new Scene(gridMaster, UX.lPx, UX.lPy);
+        Scene save = new Scene(gridMaster, UX.lPx, UX.lPy);
+        return save;
     }
  
     
     public Scene MenuGx(){
         Picture picture = new Picture("MenuBackground");
-        Scene menu;
 
         Button singlePlay = new Button("Single player");
         Button multiPlay = new Button("Multi  player");
@@ -75,12 +74,12 @@ private Stage s;
         singlePlay.setOnAction(e -> UX.controlStage(s, Select()));
         //multiPlay.setOnAction(e -> UX.controlStage(multiplayerGame));
 
-        return menu = new Scene(gridMaster, UX.lPx, UX.lPy);
+        Scene menu = new Scene(gridMaster, UX.lPx, UX.lPy);
+        return menu;
     }
 
     public Scene Select(){
         Picture picture = new Picture("MenuBackground");
-        Scene select;
 
         Button newGame = new Button("New  game");
         Button loadGame = new Button("Load game");
@@ -116,13 +115,13 @@ private Stage s;
         newGame.setOnAction(e -> UX.controlStage(s, GameGx()));
         //loadGame.setOnAction(e -> trataAcao(e));
 
-        return select = new Scene(gridMaster, UX.lPx, UX.lPy);
+        Scene select = new Scene(gridMaster, UX.lPx, UX.lPy);
+        return select;
     }
 
     public Scene GameGx(){
         Picture picture = new Picture();
         //Board board = new Board();
-        Scene game;
 
         //Set alert back
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -138,7 +137,8 @@ private Stage s;
         
         GridPane gridMaster = new GridPane();
         GridPane grid = new GridPane();
-        Pane board = new Board();
+        GridPane board = new Board();
+        //GridPane chessmen  = ((Board) board).onBoard();
 
         gridMaster.setAlignment(Pos.CENTER);
 
@@ -166,16 +166,24 @@ private Stage s;
             picture.hold("Board");
             grid.add(picture.getView(gPxBorded+2, gPyBorded+2, 0.1),0,1); 
            
+            //gridMaster.add(chessmen, 0, 1);
             gridMaster.add(menuBar, 0, 0);
             gridMaster.add(board, 0, 1);
             gridMaster.add(grid,0 ,1);
+            //chessmen.toBack();
+            board.toFront();
             grid.toBack();
-        return game = new Scene(gridMaster, UX.gPx, UX.gPy);
+            
+            
+        Chessman piece = new Pawn(Team.BLACK);
+        System.out.println(piece);
+
+        Scene game = new Scene(gridMaster, UX.gPx, UX.gPy);
+        return game;
     }
 
     public Scene testScene(){
         Picture picture = new Picture("Board");
-        Scene teste;
 
         GridPane grid = new GridPane();
         Pane board = new Board();
@@ -194,6 +202,7 @@ private Stage s;
         }
     */
 
-        return teste = new Scene(grid, UX.gPx,UX.gPy);
+    Scene teste = new Scene(grid, UX.gPx,UX.gPy);
+        return teste;
     }
 }

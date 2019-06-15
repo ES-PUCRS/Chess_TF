@@ -1,6 +1,4 @@
 //Java default API controls
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 
 //Package import
@@ -8,7 +6,7 @@ import chessmen.*;
 
 
 public class BoardSquare extends Button{
-    private Coordinate coordinate;
+    private final Coordinate coordinate;
     private Chessman chessman;
 
     //Constructor without chessman
@@ -31,9 +29,7 @@ public class BoardSquare extends Button{
 
     //Return currently chessman on the square
     public Chessman getChessman(){
-        if(chessman != null)
-            return chessman;
-        return null;
+        return chessman;
     }
 
 

@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import chessmen.*;
+
 
 public class UX extends Application{
 public static final int COLUMNS = 8;//Game.COLUMNS;
@@ -15,7 +17,6 @@ public static final int lPy = 400;
 public static final int gPx = 600;
 public static final int gPy = 650;
 private static Picture picture;
-private static Images images;
 private Stage primaryStage;
 private Scene fitScene;
 
@@ -29,7 +30,6 @@ private Scene fitScene;
 
         ScreenGx screen = new ScreenGx(primaryStage);
         
-        images = new Images();
         picture = new Picture();
         picture.hold("MenuBackground");
 
