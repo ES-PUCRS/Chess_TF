@@ -1,11 +1,12 @@
+//Java default API controls
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Images extends Button{
-public static final int square_Width = 100;
 public static final int square_Height = 100;
+public static final int square_Width = 100;
 
 private static Map<String, Image> images;
 
@@ -30,7 +31,7 @@ private static Map<String, Image> images;
 
     public static void preLoadImage(){
         images.put("WhitePawn", new Image("file:Images\\White\\Pawn.png"));
-        images.put("WhiteRook", new Image("file:Images\\White\\Rook.png"));
+        images.put("WhiteRook", new Image("file:Images\\White\\King.png"));
         images.put("WhiteKnight", new Image("file:Images\\White\\Knight.png"));
         images.put("WhiteBishop", new Image("file:Images\\White\\Bishop.png"));
         images.put("WhiteQueen", new Image("file:Images\\White\\Queen.png"));

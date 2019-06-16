@@ -3,11 +3,12 @@ package chessmen;
 
 
 public class Chessman extends ChessmanDefault{
-    public final String type; 
     private final Team team;
+    private final String type;
 
-    public Chessman(Team team){
+    public Chessman(Team team, String type){ 
         this.team = team;
+        this.type = type;
     }
 
     @Override
@@ -27,7 +28,15 @@ public class Chessman extends ChessmanDefault{
 
     @Override
     public String toString(){
-        return type;
+        String toString = "";
+        if(team == Team.WHITE)
+            toString = "White" + type;
+        else if (team == Team.BLACK)
+            toString = "Black" + type;
+            else
+        toString = "Null";
+        
+        return toString;
     }
 }
 

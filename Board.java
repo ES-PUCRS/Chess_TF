@@ -1,14 +1,15 @@
-
 //Java default API controls
 import javafx.collections.ObservableList;
+import java.util.InputMismatchException;
+import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.GridPane;
 
+//Package import
 import chessmen.*;
+
 
 public class Board extends GridPane{
     public static final int SquareSize = 65;
@@ -22,11 +23,9 @@ public class Board extends GridPane{
     private Picture picture;
 
     
-    public Board(){
+    public Board() throws InputMismatchException{
         super();
-        
-        picture = new Picture("Board");
-        new BackgroundImage(picture.picture(),null,null,null,null);//BackgroundFill(new ImagePattern(picture.picture())))));
+        setExceptionWay();
 
         //Create every 64 board spots
         //@Params treeMap(Key, Value) --Key = Integer -> Board coordinate position 
@@ -43,6 +42,7 @@ public class Board extends GridPane{
             super.add(square, coordinate.getColumn(), coordinate.getRow());
         }
 
+        //Set grid settings
         coordinate = new Coordinate(0);
         setGridLinesVisible(true);
         setAlignment(Pos.CENTER);
@@ -52,29 +52,35 @@ public class Board extends GridPane{
     }
 
     //Catch onAction event
-    public void squareCatch(ActionEvent e){
+    public void squareCatch(ActionEvent e) throws InputMismatchException{
         BoardSquare square = (BoardSquare) e.getSource();
-        System.out.println(square.getChessman());
+        Game.setPointer(square);
     }
 
     //Get all BoardSquares occupied
     public GridPane onBoard(){
         GridPane grid = new GridPane();
         
+        //Copy containing grid on super class
         ObservableList<Node> childrens = super.getChildren();
 
-        childrens.remove(childrens.size()-1);
+        //Iterate grid finding positions and which is filled
         for (Node node : childrens)
             if(node instanceof BoardSquare){
                 square = (BoardSquare) node;
                 coordinate = square.getCoordinate();
 
                 if(square.getChessman() != null){
-                    picture = new Picture(square.getChessman().getType());
+                    picture = new Picture(square.getChessman().toString());
+                    grid.add(picture.getView(SquareSize, SquareSize), coordinate.getColumn(), coordinate.getRow());
+                }
+                else{
+                    picture = new Picture("Null");
                     grid.add(picture.getView(SquareSize, SquareSize), coordinate.getColumn(), coordinate.getRow());
                 }
             }
 
+            //Set grid settings
             grid.setGridLinesVisible(true);
             grid.setAlignment(Pos.CENTER);
             grid.setPadding(new Insets(1));
@@ -84,15 +90,8 @@ public class Board extends GridPane{
         return grid;  
     }
 
-    public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
-        Node result = null;
-        ObservableList<Node> childrens = gridPane.getChildren();
-      
-        //for (Node node : childrens) 
-          //  System.out.println(node);
-          int a = childrens.size();
-        System.out.println(a);
-      
-        return result;
-      }
+    //Set where (Screen-> Game)Exception should be treated 
+    public static void setExceptionWay(){
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
+    }
 }

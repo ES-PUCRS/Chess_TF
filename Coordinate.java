@@ -1,6 +1,7 @@
 //Java default API controls
 import java.lang.Comparable;
 
+
 public class Coordinate implements Comparable<Coordinate>{
     private final int boardSize = 8;
     private int intPos;

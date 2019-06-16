@@ -1,12 +1,14 @@
+
 //Java default API controls
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-
-import chessmen.*;
+import javafx.stage.WindowEvent;
 
 
 public class UX extends Application{
@@ -22,6 +24,8 @@ private Scene fitScene;
 
     public static void main(String args[]){
         launch(args);
+
+
     }
 
     @Override
@@ -37,10 +41,10 @@ private Scene fitScene;
         fitScene = new Scene(root, lPx, lPy);
         primaryStage.setTitle("Chess");
         primaryStage.setResizable(false);
-      
+           
         controlStage(fitScene);
         controlStage(screen.GameGx());
-        primaryStage.show();
+        primaryStage.show(); 
     }
 
     public void controlStage(Scene scene){
