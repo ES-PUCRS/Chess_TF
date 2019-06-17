@@ -1,4 +1,5 @@
 //Java default API controls
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 
 
@@ -35,16 +36,31 @@ public class BoardSquare extends Button{
     public void moveChessman(BoardSquare newSpot){
         newSpot.moveChessman(chessman);
         chessman = null;
+        setImg();
     }
 
     //Replace the currently chessman by a new one
     //@Param is the new chessman that will stay at square;
     public void moveChessman(Chessman newPiece){
         chessman = newPiece;
+        setImg();
     }
 
     //Set button style to transparent
     public void SquareTransparent(){
         setStyle("-fx-background-color: transparent;");
+    }
+
+    public void setImg(){
+        Picture picture;
+        if(chessman == null)
+            picture = new Picture("Null");
+        else
+            picture = new Picture(chessman.toString());
+
+        ImageView imgVW = new ImageView(picture.picture());
+        imgVW.setFitWidth(Board.SquareSize-20);
+        imgVW.setFitHeight(Board.SquareSize-20);
+        setGraphic(imgVW);
     }
 }

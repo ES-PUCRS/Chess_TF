@@ -145,7 +145,7 @@ public class ScreenGx {
         gridMaster = new GridPane();
         Background = new GridPane();
         board = new Board();
-        chessmen = ((Board) board).onBoard();
+        //chessmen = ((Board) board).onBoard();
 
         gridMaster.setAlignment(Pos.CENTER);
 
@@ -166,10 +166,11 @@ public class ScreenGx {
         menu.setOnAction(e -> alert.LeftGame());
 
         gridMaster.add(Background, 0, 1);
-        gridMaster.add(chessmen, 0, 1);
+        //gridMaster.add(chessmen, 0, 1);
         gridMaster.add(menuBar, 0, 0);
         gridMaster.add(board, 0, 1);
 
+        /*
         board.getChildren().forEach(item -> {
             item.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -186,6 +187,7 @@ public class ScreenGx {
                 }
             });
         });
+        */
 
         Scene game = new Scene(gridMaster, UX.gPx, UX.gPy);
         return game;

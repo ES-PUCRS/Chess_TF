@@ -36,6 +36,7 @@ public class Board extends GridPane{
             square.setOnAction(e -> squareCatch(e));
             square.setMinSize(SquareSize, SquareSize);
             square.SquareTransparent();
+            square.setImg();
             super.add(square, coordinate.getColumn(), coordinate.getRow());
         }
 
@@ -53,9 +54,9 @@ public class Board extends GridPane{
         BoardSquare square = (BoardSquare) e.getSource();
         Game.setOnBoard(onBoard());
         Game.setPointer(square);
-    }
+    }   
 
-    //Get all BoardSquares occupied
+            //Get all BoardSquares occupied
     public GridPane onBoard(){
         GridPane grid = new GridPane();
         
@@ -84,7 +85,6 @@ public class Board extends GridPane{
             grid.setPadding(new Insets(1));
             grid.setHgap(1.3);
             grid.setVgap(1.3);
-
         return grid;  
     }
 

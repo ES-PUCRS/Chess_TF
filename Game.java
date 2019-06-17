@@ -23,12 +23,11 @@ public class Game{
     public static void setPointer(BoardSquare square) throws InputMismatchException{
         switch(ProgramCounter){
             case 0: fPos = square;
-                    System.out.println("\nSquare 1 catch: " + fPos.getCoordinate());
+                    System.out.println("\nSquare 1: " + fPos.getCoordinate() +"\nProgramCounter: "+ProgramCounter+"\nChessman: "+fPos.getChessman());
                     GameRun();
                     break;
             case 1: sPos = square;
-                    System.out.println("\nSquare 2 catch: " + sPos.getCoordinate());
-                    System.out.println(canMove(fPos, sPos));
+                    System.out.println("\nSquare 2: " + sPos.getCoordinate() +"\nProgramCounter: "+ProgramCounter+"\nChessman: "+sPos.getChessman());
                     GameRun();
                     break;
         }
@@ -36,25 +35,23 @@ public class Game{
 
     public static void GameRun(){
         switch(ProgramCounter){
-            case 0: //if(canMove(fPos))
+            case 0: System.out.println(canMove(fPos));
+                    if(canMove(fPos)){
                         ProgramCounter++;
-                   // else
-                    //    ProgramCounter = 0;
+                    }else
+                        posClear();
                     break;
 
-            case 1: if(canMove(fPos, sPos)){
+            case 1: System.out.println(canMove(fPos, sPos));
+                    if(canMove(fPos, sPos)){
                         fPos.moveChessman(sPos);
                         System.out.println("\nMoved: "+ fPos.getCoordinate());
                         posClear();
-                        ProgramCounter = 0;
                     }else{
                         throw new InputMismatchException("Selected chessman can not move to target.");
                     }
-                    System.out.println(canMove(fPos, sPos));
                     break;
-
-            //default: throw new  
-        }
+            }
     }
 
     /**
@@ -70,23 +67,28 @@ public class Game{
     public static boolean canMove(BoardSquare cPos, BoardSquare nPos){
         if(cPos.getChessman() == null){
             posClear();
-            throw new InputMismatchException("There is no chessman at this position."); 
+            throw new InputMismatchException("There is no chessman at this position.");
         }else if(nPos.getChessman() != null){
             if(nPos.getChessman().getTeam() == cPos.getChessman().getTeam()){
                 posClear();
-                throw new InputMismatchException("Can not move to a same team chessman position."); 
-            }else
+                throw new InputMismatchException("Can not move to a same team chessman position.");
+            }else{
+                ProgramCounter++;
                 return cPos.getChessman().MoveFx(cPos, nPos, board);
-        }else
+            }
+        }else{
+            ProgramCounter++;
             return cPos.getChessman().MoveFx(cPos, nPos, board);
+        }
     }
 
-/*
+
     public static boolean canMove(BoardSquare pos){
-        
+        if(pos.getChessman() != null)
+            return true;
         return false;
     }
-*/
+
     private static void posClear(){
         fPos = null;
         sPos = null;
@@ -95,12 +97,12 @@ public class Game{
 
 
 
-
+/*
     //Get all board points to verify movements
     public static void setPlayType(boolean b){
         single = b;
     }
-
+*/
     
     /*
      *   Private Methods aux class *
