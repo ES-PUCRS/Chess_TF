@@ -1,67 +1,105 @@
 //Package import
 import java.util.InputMismatchException;
-
-import chessmen.*;
+import javafx.scene.layout.GridPane;
 
 
 public class Game{
     private static int ProgramCounter = 0;
-    private static BoardSquare FPos;
-    private static BoardSquare SPos;
-    private static Board board;
+    private static BoardSquare fPos;
+    private static BoardSquare sPos;
+    //private static boolean single;
+    private static GridPane board;
 
     //Send all chessmen on start position
     public static Chessman UnboxChessmen(int pos){
         return iniPosPiece(pos);
     }
 
+    public static void setOnBoard(GridPane onBoard){
+        board = onBoard;
+    }
+
     //Get Board onAction event and deal with
     public static void setPointer(BoardSquare square) throws InputMismatchException{
-        
         switch(ProgramCounter){
-            case 0: FPos = square;
-                    System.out.println("\nPrimeira POS: \n"+FPos.getChessman() + "\n" + FPos.getCoordinate());
-                    ProgramCounter++;
-                    //GameRun();
+            case 0: fPos = square;
+                    System.out.println("\nSquare 1 catch: " + fPos.getCoordinate());
+                    GameRun();
                     break;
-            case 1: SPos = square;
-            System.out.println("\nSegunda POS: \n"+SPos.getChessman() + "\n" + SPos.getCoordinate());
-                    //GameRun();
+            case 1: sPos = square;
+                    System.out.println("\nSquare 2 catch: " + sPos.getCoordinate());
+                    System.out.println(canMove(fPos, sPos));
+                    GameRun();
                     break;
-            default: System.out.println("Err.: 01 - Out of program routine.");
-            //ScreenGx.reloadBoard();
         }
-            FPos.moveChessman(SPos);
-            System.out.println("\nMoved: \n"+SPos.getChessman() + "\n" + SPos.getCoordinate());
     }
 
     public static void GameRun(){
         switch(ProgramCounter){
-            case 0: if(canMove(FPos))
+            case 0: //if(canMove(fPos))
                         ProgramCounter++;
-                    else
-                        throw new InputMismatchException("There is not possible moviments."); 
+                   // else
+                    //    ProgramCounter = 0;
                     break;
-            case 1: ProgramCounter++;
+
+            case 1: if(canMove(fPos, sPos)){
+                        fPos.moveChessman(sPos);
+                        System.out.println("\nMoved: "+ fPos.getCoordinate());
+                        posClear();
+                        ProgramCounter = 0;
+                    }else{
+                        throw new InputMismatchException("Selected chessman can not move to target.");
+                    }
+                    System.out.println(canMove(fPos, sPos));
                     break;
+
             //default: throw new  
         }
     }
 
+    /**
+     * First position can not be null;
+     * New position state
+     *      New position can not be fill with same team Chessman
+     *
+     * @param cPos - Current Position
+     * @param nPos - New Position
+     * @return True if the chessman can assume that new coordinate
+     */
     //Test if the chessman can move to designed position
-    public static boolean canMove(BoardSquare CPos, BoardSquare NPos){
-        CPos.getChessman();
-        return false;
+    public static boolean canMove(BoardSquare cPos, BoardSquare nPos){
+        if(cPos.getChessman() == null){
+            posClear();
+            throw new InputMismatchException("There is no chessman at this position."); 
+        }else if(nPos.getChessman() != null){
+            if(nPos.getChessman().getTeam() == cPos.getChessman().getTeam()){
+                posClear();
+                throw new InputMismatchException("Can not move to a same team chessman position."); 
+            }else
+                return cPos.getChessman().MoveFx(cPos, nPos, board);
+        }else
+            return cPos.getChessman().MoveFx(cPos, nPos, board);
     }
+
+/*
     public static boolean canMove(BoardSquare pos){
+        
         return false;
     }
+*/
+    private static void posClear(){
+        fPos = null;
+        sPos = null;
+        ProgramCounter = 0;
+    }
+
+
+
 
     //Get all board points to verify movements
-    public static void refreshBoard(Board b){
-        board = b;
+    public static void setPlayType(boolean b){
+        single = b;
     }
-
 
     
     /*
@@ -95,41 +133,3 @@ public class Game{
         return null;
     }   
 }
-
-
-/*
-
-// Faça um programa que leia uma string e verifique se ela é palíndromo. 
-// Palíndromos são aquelas palavras que podem ser lidas tanto da esquerda para direita 
-// ou da direita para esquerda. Exemplo: arara. 
-// Crie um método recursivo para verificar se a string é palíndromo.
-
-import java.util.Scanner;
-
-public class Exercicio12{
-
-public static void main (String args[]){
-
-Scanner teclado = new Scanner (System.in);
-
-System.out.print ("\fInforme uma string: ");
-String palavra = teclado.nextLine();
-
-if (palindromo(palavra)) System.out.print ("É um palíndromo."); 
-else System.out.print ("Não é um palíndromo.");
-    }
-
-public static boolean palindromo (String palavra){
-String palavral = palavra.toLowerCase();
-return palindromoR (palavral, palavral.length()-1);    
-}    
-
-private static boolean palindromoR (String palavra, int comp){
-int compInvertido = (palavra.length()-1)-comp;    
-if ((compInvertido==comp || compInvertido == comp-1) && (palavra.charAt(comp)==palavra.charAt(compInvertido))) return true;
-return palindromoR (palavra, comp-1) && (palavra.charAt(comp) == palavra.charAt(compInvertido));
-}
-    
-}
-
-*/

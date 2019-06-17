@@ -1,10 +1,9 @@
-//Set Package
-package chessmen;
-
+import javafx.scene.layout.GridPane;
 
 public class Chessman extends ChessmanDefault{
-    private final Team team;
+    protected static final int SquareRows = 8;
     private final String type;
+    private final Team team;
 
     public Chessman(Team team, String type){ 
         this.team = team;
@@ -20,10 +19,10 @@ public class Chessman extends ChessmanDefault{
     public String getType(){
         return type;
     }
-
+    
     @Override
-    public boolean moveFx(){
-        return true;
+    public boolean MoveFx(BoardSquare cPos, BoardSquare nPos, GridPane board){
+        return false;
     }
 
     @Override

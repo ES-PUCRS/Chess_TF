@@ -14,20 +14,13 @@ public class AlertList extends ScreenGx{
     public void IllegalMovement(String message){
         Alert IllegalMovement = new Alert(AlertType.WARNING);
 
-        if(message.equals("There is not possible moviments.")){
-            IllegalMovement.setTitle("Invalid moviment!");
-            IllegalMovement.setHeaderText(message);
-            IllegalMovement.setContentText("Select another chessman to keep playing.");
-            IllegalMovement.showAndWait();
-        }
-        else if(message.equals("This is not your chessman.")){
-            IllegalMovement.setTitle("Invalid moviment!");
-            IllegalMovement.setHeaderText(message);
-            IllegalMovement.setContentText("Select another chessman to keep playing.");
-            IllegalMovement.showAndWait();
-        }
+        IllegalMovement.setTitle("Invalid moviment!");
+        IllegalMovement.setHeaderText(message);
+        IllegalMovement.setContentText("Select another chessman position to keep playing.");
+        
+        IllegalMovement.showAndWait();
     }
-
+    
     public void LeftGame(){
         Alert LeftGame = new Alert(AlertType.CONFIRMATION);
         LeftGame.setTitle("Your game was not save.");

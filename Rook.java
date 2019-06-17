@@ -1,7 +1,3 @@
-//Set Package
-package chessmen;
-
-
 public class Rook extends Chessman{
     public final String type = "Rook";
 

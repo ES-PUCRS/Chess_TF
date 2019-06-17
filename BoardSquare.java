@@ -1,9 +1,6 @@
 //Java default API controls
 import javafx.scene.control.Button;
 
-//Package import
-import chessmen.*;
-
 
 public class BoardSquare extends Button{
     private final Coordinate coordinate;

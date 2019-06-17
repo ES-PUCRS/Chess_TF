@@ -7,9 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 
-//Package import
-import chessmen.*;
-
 
 public class Board extends GridPane{
     public static final int SquareSize = 65;
@@ -54,6 +51,7 @@ public class Board extends GridPane{
     //Catch onAction event
     public void squareCatch(ActionEvent e) throws InputMismatchException{
         BoardSquare square = (BoardSquare) e.getSource();
+        Game.setOnBoard(onBoard());
         Game.setPointer(square);
     }
 

@@ -17,8 +17,7 @@ import javafx.stage.Stage;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 
-
-public class ScreenGx{
+public class ScreenGx {
     public static final int gPxBorded = UX.gPx - 10;
     public static final int gPyBorded = UX.gPy - 58;
     private AlertList alert;
@@ -170,7 +169,7 @@ public class ScreenGx{
         gridMaster.add(chessmen, 0, 1);
         gridMaster.add(menuBar, 0, 0);
         gridMaster.add(board, 0, 1);
-                 
+
         board.getChildren().forEach(item -> {
             item.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -191,6 +190,21 @@ public class ScreenGx{
         Scene game = new Scene(gridMaster, UX.gPx, UX.gPy);
         return game;
     } 
+
+    public Scene teste(){
+        gridMaster = new GridPane();
+        board = new Board();
+
+        gridMaster.add(board, 0 ,0);
+
+        for(int i = 0; i < 64; i++){
+            BoardSquare a = (BoardSquare) board.getChildren().get(i);
+            System.out.println(a.getChessman());
+            System.out.println(a.getCoordinate().toString());
+        }
+        Scene teste = new Scene(gridMaster, UX.gPx, UX.gPy);
+        return teste;
+    }
 
 }
 //((Board) board).boardGeThread().setDefaultUncaughtExceptionHandler(new ExceptionHandler());

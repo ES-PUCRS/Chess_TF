@@ -43,8 +43,8 @@ public class Coordinate implements Comparable<Coordinate>{
         this.intPos = (row * boardSize) + column;
     }
     private void importPosition(int pos){
-        this.row = pos / boardSize;
         this.column = pos % boardSize;
+        this.row = pos / boardSize;
         this.intPos = pos;
     }
 
