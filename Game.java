@@ -15,8 +15,8 @@ public class Game{
         return iniPosPiece(pos);
     }
 
-    public static void setOnBoard(GridPane onBoard){
-        board = onBoard;
+    public static void setOnBoard(GridPane boardplay) {
+        board = boardplay;
     }
 
     //Get Board onAction event and deal with
@@ -34,25 +34,25 @@ public class Game{
     }
 
     public static void GameRun(){
+        System.out.println("ProgramCounter: "+ProgramCounter);
         switch(ProgramCounter){
-            case 0: System.out.println(canMove(fPos));
-                    if(canMove(fPos)){
-                        ProgramCounter++;
-                    }else
-                        posClear();
+            case 0: ProgramCounter++;
                     break;
 
-            case 1: System.out.println(canMove(fPos, sPos));
+            case 1: System.out.println("TryCatch: " + canMove(fPos, sPos));
                     if(canMove(fPos, sPos)){
                         fPos.moveChessman(sPos);
                         System.out.println("\nMoved: "+ fPos.getCoordinate());
                         posClear();
                     }else{
+                        posClear();
                         throw new InputMismatchException("Selected chessman can not move to target.");
                     }
                     break;
-            }
+        }
     }
+
+    public static int getProgramCounter(){ return ProgramCounter; }
 
     /**
      * First position can not be null;
@@ -65,7 +65,10 @@ public class Game{
      */
     //Test if the chessman can move to designed position
     public static boolean canMove(BoardSquare cPos, BoardSquare nPos){
-        if(cPos.getChessman() == null){
+        if(cPos.getCoordinate().compareTo(nPos.getCoordinate()) == 0){
+            posClear();
+            throw new InputMismatchException("Can not move a chessman to the same square.");
+        }else if(cPos.getChessman() == null){
             posClear();
             throw new InputMismatchException("There is no chessman at this position.");
         }else if(nPos.getChessman() != null){
@@ -73,20 +76,11 @@ public class Game{
                 posClear();
                 throw new InputMismatchException("Can not move to a same team chessman position.");
             }else{
-                ProgramCounter++;
                 return cPos.getChessman().MoveFx(cPos, nPos, board);
             }
         }else{
-            ProgramCounter++;
             return cPos.getChessman().MoveFx(cPos, nPos, board);
         }
-    }
-
-
-    public static boolean canMove(BoardSquare pos){
-        if(pos.getChessman() != null)
-            return true;
-        return false;
     }
 
     private static void posClear(){

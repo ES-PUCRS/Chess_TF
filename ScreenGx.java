@@ -1,7 +1,5 @@
-
 //Java default API controls
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.FontWeight;
@@ -14,7 +12,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 
 public class ScreenGx {
@@ -22,7 +19,6 @@ public class ScreenGx {
     public static final int gPyBorded = UX.gPy - 58;
     private AlertList alert;
     private GridPane gridMaster;
-    private GridPane chessmen;
     private GridPane Background;
     private MenuBar menuBar;
     private GridPane board;
@@ -145,7 +141,6 @@ public class ScreenGx {
         gridMaster = new GridPane();
         Background = new GridPane();
         board = new Board();
-        //chessmen = ((Board) board).onBoard();
 
         gridMaster.setAlignment(Pos.CENTER);
 
@@ -166,28 +161,8 @@ public class ScreenGx {
         menu.setOnAction(e -> alert.LeftGame());
 
         gridMaster.add(Background, 0, 1);
-        //gridMaster.add(chessmen, 0, 1);
         gridMaster.add(menuBar, 0, 0);
         gridMaster.add(board, 0, 1);
-
-        /*
-        board.getChildren().forEach(item -> {
-            item.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    if (event.getClickCount() == 1) {
-                        GridPane refreshGrid = new GridPane();
-                        chessmen = ((Board) board).onBoard();
-                        refreshGrid.add(Background, 0, 1);
-                        refreshGrid.add(chessmen, 0, 1);
-                        refreshGrid.add(menuBar, 0, 0);
-                        refreshGrid.add(board, 0, 1);
-                        gridMaster.getChildren().setAll(refreshGrid);
-                    }
-                }
-            });
-        });
-        */
 
         Scene game = new Scene(gridMaster, UX.gPx, UX.gPy);
         return game;
@@ -209,5 +184,28 @@ public class ScreenGx {
     }
 
 }
-//((Board) board).boardGeThread().setDefaultUncaughtExceptionHandler(new ExceptionHandler());
+
+
+        //Não usar esta burrice.
+        /*
+        board.getChildren().forEach(item -> {
+            item.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (event.getClickCount() == 1) {
+                        GridPane refreshGrid = new GridPane();
+                        chessmen = ((Board) board).onBoard();
+                        refreshGrid.add(Background, 0, 1);
+                        refreshGrid.add(chessmen, 0, 1);
+                        refreshGrid.add(menuBar, 0, 0);
+                        refreshGrid.add(board, 0, 1);
+                        gridMaster.getChildren().setAll(refreshGrid);
+                    }
+                }
+            });
+        });
+        */
+
+        //Originário da classe Board
+        //((Board) board).boardGeThread().setDefaultUncaughtExceptionHandler(new ExceptionHandler());
     

@@ -17,7 +17,6 @@ public class Board extends GridPane{
     private Coordinate coordinate;
     private BoardSquare square;
     private Chessman chessman;
-    private Picture picture;
 
     
     public Board() throws InputMismatchException{
@@ -52,32 +51,25 @@ public class Board extends GridPane{
     //Catch onAction event
     public void squareCatch(ActionEvent e) throws InputMismatchException{
         BoardSquare square = (BoardSquare) e.getSource();
-        Game.setOnBoard(onBoard());
+        if(Game.getProgramCounter() != 0)
+            Game.setOnBoard(onBoard());
         Game.setPointer(square);
-    }   
+    }
 
-            //Get all BoardSquares occupied
-    public GridPane onBoard(){
+    //Get all BoardSquares occupied
+    private GridPane onBoard(){
         GridPane grid = new GridPane();
-        
+
         //Copy containing grid on super class
         ObservableList<Node> childrens = super.getChildren();
-
         //Iterate grid finding positions and which is filled
-        for (Node node : childrens)
+        for (Node node : childrens){
             if(node instanceof BoardSquare){
-                square = (BoardSquare) node;
-                coordinate = square.getCoordinate();
-
-                if(square.getChessman() != null){
-                    picture = new Picture(square.getChessman().toString());
-                    grid.add(picture.getView(SquareSize, SquareSize), coordinate.getColumn(), coordinate.getRow());
-                }
-                else{
-                    picture = new Picture("Null");
-                    grid.add(picture.getView(SquareSize, SquareSize), coordinate.getColumn(), coordinate.getRow());
-                }
+                BoardSquare osquare = (BoardSquare) node;
+                square = new BoardSquare(osquare.getCoordinate(), osquare.getChessman());
+                grid.add(square, square.getCoordinate().getColumn(), square.getCoordinate().getRow());
             }
+        }
 
             //Set grid settings
             grid.setGridLinesVisible(true);
@@ -85,7 +77,7 @@ public class Board extends GridPane{
             grid.setPadding(new Insets(1));
             grid.setHgap(1.3);
             grid.setVgap(1.3);
-        return grid;  
+        return grid;
     }
 
     //Set where (Screen-> Game)Exception should be treated 
