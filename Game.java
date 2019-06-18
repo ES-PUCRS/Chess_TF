@@ -34,7 +34,6 @@ public class Game{
     }
 
     public static void GameRun(){
-        System.out.println("ProgramCounter: "+ProgramCounter);
         switch(ProgramCounter){
             case 0: ProgramCounter++;
                     break;

@@ -1,5 +1,3 @@
-import javafx.scene.layout.GridPane;
-
 public class Pawn extends ChessmanDefault {
     public final String type = "Pawn";    //Chessman type
     //private int newSquarePos;       // New target between origin and new position
@@ -40,12 +38,16 @@ public class Pawn extends ChessmanDefault {
      *      i,k=0                           i,k=0
      * 
      */
+    //A preset vars to catch movement validation
     @Override 
-    public boolean MoveFx(BoardSquare cPos, BoardSquare nPos, GridPane board){
-       super.setBoard(board);
+    public boolean chessmanMovement(BoardSquare cPos, BoardSquare nPos){
+       return true;
+    }
 
-
-
+    //Trying catch failures and verifying cPos to nPos 
+    //Try square by square until target
+    @Override
+    public boolean tryMove(int p){
         return true;
     }
 }
