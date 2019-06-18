@@ -31,7 +31,7 @@ private static Map<String, Image> images;
 
     public static void preLoadImage(){
         images.put("WhitePawn", new Image("file:Images\\White\\Pawn.png"));
-        images.put("WhiteRook", new Image("file:Images\\White\\King.png"));
+        images.put("WhiteRook", new Image("file:Images\\White\\Rook.png"));
         images.put("WhiteKnight", new Image("file:Images\\White\\Knight.png"));
         images.put("WhiteBishop", new Image("file:Images\\White\\Bishop.png"));
         images.put("WhiteQueen", new Image("file:Images\\White\\Queen.png"));

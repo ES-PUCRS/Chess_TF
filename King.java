@@ -14,46 +14,48 @@ public class King extends ChessmanDefault {
         super(team, "King");
     }
     
-    /**
-     * Mathematics:
-     * 
-     *  i = row; 
-     *  c = column;
-     *  Q = pos % 8;
-     *  P = Square sum;
-     *  pos = (i * 8) + c;
-     *  cPos = Current Position;
-     *  nPos = New Position;
-     * 
-     *              Board
-     *     { ∀ c ∈ N | 0 ≤ c ≤ 7 }
-     *     { ∀ i ∈ N | 0 ≤ i ≤ 7 }
-     * 
-     *                                          +-------------------+--------------------+
-     *  x1 = {[i * 8 + (c - k)] % 8 ≠ 0}        ¦ Q > nQ ⇒ P = -1; ¦ L > nL ⇒ P = -8;   ¦
-     *  x2 = {[i * 8 + (c - k)] % 8 ≠ 7}        ¦ Q < nQ ⇒ P =  1; ¦ L < nL ⇒ P =  8;   ¦
-     *                                          +-------------------+--------------------+
-     * 
-     * 
-     *           c                            i
-     *  x1 → 1 + Σ  (i * 8) + c  \/  x2 → 8 + Σ  (i * 8) + c  ⇔  cPos < nPos 
-     *         i,k=0                        c,k=0
-     * 
-     *            c                             i
-     *  x1 → -1 + Σ  (i * 8) + c  \/  x2 → -8 + Σ  (i * 8) + c  ⇔  cPos > nPos 
-     *          i,k=0                         c,k=0
-     * 
-     */
     //A preset vars to catch movement validation
     @Override 
     public boolean chessmanMovement(BoardSquare cPos, BoardSquare nPos){
-        return true;
+        nPosInt = nPos.getCoordinate().getIntPos();
+        column = cPos.getCoordinate().getColumn();
+        row = cPos.getCoordinate().getRow();
+        
+        switch(compass()){
+            case 1: return tryMove(9);
+            case 2: return tryMove(7);
+            case 3: return tryMove(-7);
+            case 4: return tryMove(-9);
+            case 5: return tryMove(8);  
+            case 6: return tryMove(-8);   
+            case 7: return tryMove(1);    
+            case 8: return tryMove(-1);    
+        }
+        return false;
     }
-
+    //Trying catch failures and verifying cPos to nPos 
+    //Try square by square until target
     //Trying catch failures and verifying cPos to nPos 
     //Try square by square until target
     @Override
     public boolean tryMove(int p){
-        return true;
+        switch(p){
+            case 9: return aux(p);
+            case 7: return aux(p);
+            case -7: return aux(p);
+            case -9: return aux(p);
+            case 8: return aux(p);
+            case -8: return aux(p);
+            case 1: return aux(p);
+            case -1: return aux(p);
+        }
+    return false;
+    }
+    
+    private boolean aux(int p){
+        newSquarePos = super.sumPosition(row, 0, p);
+        if(nPosInt == newSquarePos)
+            return true;
+        else return false;
     }
 }

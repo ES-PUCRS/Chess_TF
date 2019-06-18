@@ -53,12 +53,12 @@ public class Bishop extends ChessmanDefault {
         if(row == nPos.getCoordinate().getRow())
             return false;
 
-            switch(compass()){
-                case 1: return tryMove(9);  // (cQ < nQ)   pos < nPos
-                case 2: return tryMove(7);  // (cQ > nQ)
-                case 3: return tryMove(-7); // (cQ < nQ)   pos > nPos
-                case 4: return tryMove(-9); // (cQ > nQ)
-            }
+        switch(compass()){
+            case 1: return tryMove(9);  // (cQ < nQ)   pos < nPos
+            case 2: return tryMove(7);  // (cQ > nQ)
+            case 3: return tryMove(-7); // (cQ < nQ)   pos > nPos
+            case 4: return tryMove(-9); // (cQ > nQ)
+        }
         return false;
     }
 

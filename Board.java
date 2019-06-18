@@ -41,7 +41,7 @@ public class Board extends GridPane{
 
         //Set grid settings
         coordinate = new Coordinate(0);
-        setGridLinesVisible(true);
+        //setGridLinesVisible(true);
         setAlignment(Pos.CENTER);
         setPadding(new Insets(1));
         setHgap(1.3);
@@ -51,8 +51,11 @@ public class Board extends GridPane{
     //Catch onAction event
     public void squareCatch(ActionEvent e) throws InputMismatchException{
         BoardSquare square = (BoardSquare) e.getSource();
-        if(Game.getProgramCounter() != 0)
+        if(Game.getProgramCounter() == 0 || Game.getProgramCounter() == 3)
+            square.SquareSelect();
+        else
             Game.setOnBoard(onBoard());
+            
         Game.setPointer(square);
     }
 
@@ -72,7 +75,7 @@ public class Board extends GridPane{
         }
 
             //Set grid settings
-            grid.setGridLinesVisible(true);
+            //grid.setGridLinesVisible(true);
             grid.setAlignment(Pos.CENTER);
             grid.setPadding(new Insets(1));
             grid.setHgap(1.3);

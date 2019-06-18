@@ -3,57 +3,49 @@ public class Knight extends ChessmanDefault {
     private BoardSquare shouldTry;  // BoardSquare that would catch by newSquarePos
 
     private int newSquarePos;       // New target between origin and new position
+    private int secSquarePos;
     private int nPosInt;            // New position on integer
-    private int column;             // Current Column
-    private int row;                // Current Row
-    private int cQ;                 // Current quadrant
-    private int nQ;                 // New quadrant
+    private int cPosInt;            // Current position on integer
+    private int row;                // Current row
 
 
     public Knight(Team team){
         super(team, "Knight");
     }
       
-    /**
-     * Mathematics:
-     * 
-     *  i = row; 
-     *  c = column;
-     *  Q = pos % 8;
-     *  P = Square sum;
-     *  pos = (i * 8) + c;
-     *  cPos = Current Position;
-     *  nPos = New Position;
-     * 
-     *              Board
-     *     { ∀ c ∈ N | 0 ≤ c ≤ 7 }
-     *     { ∀ i ∈ N | 0 ≤ i ≤ 7 }
-     * 
-     *                                          +-------------------+--------------------+
-     *  x1 = {[i * 8 + (c - k)] % 8 ≠ 0}        ¦ Q > nQ ⇒ P = -1; ¦ L > nL ⇒ P = -8;   ¦
-     *  x2 = {[i * 8 + (c - k)] % 8 ≠ 7}        ¦ Q < nQ ⇒ P =  1; ¦ L < nL ⇒ P =  8;   ¦
-     *                                          +-------------------+--------------------+
-     * 
-     * 
-     *           c                            i
-     *  x1 → 1 + Σ  (i * 8) + c  \/  x2 → 8 + Σ  (i * 8) + c  ⇔  cPos < nPos 
-     *         i,k=0                        c,k=0
-     * 
-     *            c                             i
-     *  x1 → -1 + Σ  (i * 8) + c  \/  x2 → -8 + Σ  (i * 8) + c  ⇔  cPos > nPos 
-     *          i,k=0                         c,k=0
-     * 
-     */
-    //A preset vars to catch movement validation
     @Override 
     public boolean chessmanMovement(BoardSquare cPos, BoardSquare nPos){
-        return true;
+        nPosInt = nPos.getCoordinate().getIntPos();
+        cPosInt = cPos.getCoordinate().getIntPos();
+        row = cPos.getCoordinate().getRow();
+        
+        switch(compass()){
+            case 1: return tryMove(10);   // (cQ == nQ)   Pos < nPos -> ok
+            case 2: return tryMove(6);   // (cQ > nQ)    Pos == nPos -> ok
+            case 3: return tryMove(-6);    // (cQ < nQ)    Pos == nPos -> ok
+            case 4: return tryMove(-10);    // (cQ == nQ)   Pos > nPos
+        }
+    return false;
     }
-
+    
     //Trying catch failures and verifying cPos to nPos 
     //Try square by square until target
     @Override
     public boolean tryMove(int p){
-        return true;
+        switch(p){
+            case 10:  return aux(p, 17);
+            case 6:   return aux(p, 15);
+            case -6:  return aux(p, -15);
+            case -10: return aux(p, -17);
+        }
+    return false;
+    }
+    
+    private boolean aux(int p, int k){
+        newSquarePos = super.sumPosition(row, 0, p);
+        secSquarePos = super.sumPosition(row, 0, k);
+        if(nPosInt == newSquarePos || nPosInt == secSquarePos)
+            return true;
+        else return false;
     }
 }

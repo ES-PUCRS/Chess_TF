@@ -53,6 +53,11 @@ public class BoardSquare extends Button{
         setStyle("-fx-background-color: transparent;");
     }
 
+    public void SquareSelect(){
+        setStyle("-fx-background-color: red;" +
+                 "-fx-opacity: 0.15;");
+    }
+
     public void setImg(){
         Picture picture;
         if(chessman == null)

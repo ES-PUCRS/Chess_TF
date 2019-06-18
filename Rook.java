@@ -54,11 +54,11 @@ public class Rook extends ChessmanDefault {
 
         switch(compass()){
             case 6: return tryMove(-8);   // (cQ == nQ)   Pos < nPos
-            case 8: return tryMove(-1);   // (cQ > nQ)    Pos == nPos
-            case 7: return tryMove(1);    // (cQ < nQ)    Pos == nPos
+            case 4: return tryMove(-1);   // (cQ > nQ)    Pos == nPos
+            case 1: return tryMove(1);    // (cQ < nQ)    Pos == nPos
             case 5: return tryMove(8);    // (cQ == nQ)   Pos > nPos
         }
-    return false;
+        return false;
     }
 
     //Trying catch failures and verifying cPos to nPos 
@@ -94,9 +94,7 @@ public class Rook extends ChessmanDefault {
         for(int k = 0; k < stop; k++){
             if(nPosInt == newSquarePos)
                 return true;
-            newSquarePos = super.sumPosition(row, 0, p * k);
-            System.out.println("newSquarePos -> "+newSquarePos);
-            System.out.println("Row: "+row+" Column: "+column+" p: "+p+" k: "+k);
+            newSquarePos = super.sumPosition(row, 0, p * (k + 1));
             if(!super.tryMoveNext(newSquarePos, nPosInt))
                 return false;
         }

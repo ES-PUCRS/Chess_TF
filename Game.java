@@ -7,7 +7,7 @@ public class Game{
     private static int ProgramCounter = 0;
     private static BoardSquare fPos;
     private static BoardSquare sPos;
-    //private static boolean single;
+    private static boolean single;
     private static GridPane board;
 
     //Send all chessmen on start position
@@ -33,13 +33,16 @@ public class Game{
         }
     }
 
-    public static void GameRun(){
+    public static void GameRun()throws InputMismatchException{
         switch(ProgramCounter){
-            case 0: ProgramCounter++;
+            case 0: if(fPos.getChessman() == null){
+                        posClear();
+                        throw new InputMismatchException("There is no chessman at this position.");
+                    }
+                    ProgramCounter++;
                     break;
 
-            case 1: System.out.println("TryCatch: " + canMove(fPos, sPos));
-                    if(canMove(fPos, sPos)){
+            case 1: if(canMove(fPos, sPos)){
                         fPos.moveChessman(sPos);
                         System.out.println("\nMoved: "+ fPos.getCoordinate());
                         posClear();
@@ -74,28 +77,26 @@ public class Game{
             if(nPos.getChessman().getTeam() == cPos.getChessman().getTeam()){
                 posClear();
                 throw new InputMismatchException("Can not move to a same team chessman position.");
-            }else{
-                return cPos.getChessman().MoveFx(cPos, nPos, board);
             }
-        }else{
-            return cPos.getChessman().MoveFx(cPos, nPos, board);
         }
+
+        return cPos.getChessman().MoveFx(cPos, nPos, board);
     }
 
     private static void posClear(){
+        fPos.SquareTransparent();
+        ProgramCounter = 0;
         fPos = null;
         sPos = null;
-        ProgramCounter = 0;
     }
 
 
 
-/*
     //Get all board points to verify movements
     public static void setPlayType(boolean b){
         single = b;
     }
-*/
+
     
     /*
      *   Private Methods aux class *
@@ -121,9 +122,9 @@ public class Game{
             return new Knight(iniPosTeam(pos));
         else if(pos == 2 || pos == 5 || pos == 58 || pos == 61)
             return new Bishop(iniPosTeam(pos));
-        else if(pos == 3 || pos == 60)
+        else if(pos == 3 || pos == 59)
             return new Queen(iniPosTeam(pos));
-        else if(pos == 4 || pos == 59)
+        else if(pos == 4 || pos == 60)
             return new King(iniPosTeam(pos));
         return null;
     }   

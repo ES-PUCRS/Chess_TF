@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+
 public class ScreenGx {
     public static final int gPxBorded = UX.gPx - 10;
     public static final int gPyBorded = UX.gPy - 58;
@@ -73,7 +74,10 @@ public class ScreenGx {
         grid.add(hb, 0, 0);
         grid.add(vb, 0, 1);
 
-        singlePlay.setOnAction(e -> UX.controlStage(s, Select()));
+        singlePlay.setOnAction(e -> {
+            Game.setPlayType(true);
+            UX.controlStage(s, Select());
+        });
         // multiPlay.setOnAction(e -> UX.controlStage(multiplayerGame));
 
         Scene menu = new Scene(gridMaster, UX.lPx, UX.lPy);

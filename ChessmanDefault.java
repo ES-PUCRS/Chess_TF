@@ -57,6 +57,7 @@ public abstract class ChessmanDefault extends Chessman{
         comparedPosition = cPos.getCoordinate().compareTo(nPos.getCoordinate());
         cQ = cPos.getCoordinate().getColumn();
         nQ = nPos.getCoordinate().getColumn();
+        cPos.SquareTransparent();
         setBoard(board);
         return chessmanMovement(cPos, nPos);
     }
@@ -93,7 +94,7 @@ public abstract class ChessmanDefault extends Chessman{
     //Method to square of column-row that chessman can move;
     @Override
     public int sumPosition(int i, int k, int p){
-        return ((i * SquareRows) + (cQ - k)) + p;
+        return (((i * SquareRows) + (cQ - k)) + p);
     }
 
     //Used to verify if the next possible movement is possible
