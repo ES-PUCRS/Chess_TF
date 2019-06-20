@@ -2,14 +2,20 @@
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
+public class AlertList{
+    private static AlertList instance;
+    private static ScreenGx screen;
 
-public class AlertList extends ScreenGx{
+    private AlertList(){
+        screen = ScreenGx.getInstance();
+    } 
     
-    public AlertList(Stage s){
-        super(s);
-    }
+    public static AlertList getInstance(){
+        if (instance == null)
+           instance = new AlertList();
+        return instance;
+   }
 
     public void IllegalMovement(String message){
         Alert IllegalMovement = new Alert(AlertType.WARNING);
@@ -35,9 +41,9 @@ public class AlertList extends ScreenGx{
         
         LeftGame.showAndWait().ifPresent(b ->{
             if(b == sure)
-                UX.controlStage(getStage(), super.MenuGx());
+                UX.controlStage(ScreenGx.getStage(), screen.MenuGx());
             else if(b == saveBefore)
-                UX.controlStage(getStage(), super.Save());
+                UX.controlStage(ScreenGx.getStage(), screen.Save());
             else LeftGame.close();
         });
     }

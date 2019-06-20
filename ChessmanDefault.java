@@ -1,5 +1,6 @@
-
+//Package import
 import javafx.scene.layout.GridPane;
+
 
 public abstract class ChessmanDefault extends Chessman{
     protected static final int SquareRows = 8;  // BoardSquare 8x8
@@ -41,9 +42,9 @@ public abstract class ChessmanDefault extends Chessman{
     @Override
     public String toString(){
         String toString = "";
-        if(team == Team.WHITE)
+        if(team == Team.White)
             toString = "White" + type;
-        else if (team == Team.BLACK)
+        else if (team == Team.Black)
             toString = "Black" + type;
             else
         toString = "Null";
@@ -70,24 +71,18 @@ public abstract class ChessmanDefault extends Chessman{
         if(comparedPosition == -1){
             if(cQ == nQ)
                 return 5;               //DOWN
-            else if(cQ < nQ){
-                return 1;               //DOWN-RIGHT
-            }else 
+            else if(cQ < nQ)
+                return 1;               //DOWN-RIGHT - RIGHT
+            else 
                 return 2;               //DOWN-LEFT
-        }else if(comparedPosition == 1){
+        }else{
             if(cQ == nQ)
                 return 6;               //UP
-            else if(cQ < nQ){
+            else if(cQ < nQ)
                 return 3;               // UP-RIGHT
-            }else
-                return 4;               // UP-LEFT
-        }else{
-            if(cQ < nQ){
-                return 7;               // RIGHT
-            }else
-                return 8;               // LEFT
+            else
+                return 4;               // UP-LEFT - LEFT
         }
-
     }
 
     

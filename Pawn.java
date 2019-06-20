@@ -1,53 +1,74 @@
 public class Pawn extends ChessmanDefault {
     public final String type = "Pawn";    //Chessman type
-    //private int newSquarePos;       // New target between origin and new position
-
+    private BoardSquare nPos;       // new target Position
+    private int newSquarePos;       // New target between origin and new position
+    private int nPosInt;            // New position on integer
+    private int row;                // Current row
 
     public Pawn(Team team){
         super(team, "Pawn");
     }
-    
-    /**
-     * Mathematics:
-     * 
-     *  i = row; 
-     *  c = column;
-     *  Q = pos % 8;
-     *  P = Square sum;
-     *  pos = (i * 8) + c;
-     *  cPos = Current Position;
-     *  nPos = New Position;
-     * 
-     *              Board
-     *     { ∀ c ∈ N | 0 ≤ c ≤ 7 }
-     *     { ∀ i ∈ N | 0 ≤ i ≤ 7 }
-     *                                          +----------------------+
-     *  x1 = {[i * 8 + (c - k)] % 8 ≠ 0}        ¦ Q > nQ ⇒ P = -9, 7; ¦
-     *  x2 = {[i * 8 + (c - k)] % 8 ≠ 7}        ¦ Q < nQ ⇒ P = -7, 9; ¦
-     *                                          +----------------------+
-     * 
-     *  Team.White ⇒ {i = i - 7; [-8, -7, -9]};
-     * 
-     * 
-     *       7-i
-     *        Σ  [(i * 8) + c] + 8
-     *      i,k=0
-     * 
-     *       7-i                             7-i
-     *  x1 →  Σ  [(i * 8) + c] + 7  \/  x2 →  Σ  [(i * 8) + c] + 9 
-     *      i,k=0                           i,k=0
-     * 
-     */
+
     //A preset vars to catch movement validation
     @Override 
     public boolean chessmanMovement(BoardSquare cPos, BoardSquare nPos){
-       return true;
+        nPosInt = nPos.getCoordinate().getIntPos();
+        row = cPos.getCoordinate().getRow();
+        this.nPos = nPos;
+        
+        
+        if(getTeam() == Team.White){
+            if(cPos.getCoordinate().compareTo(nPos.getCoordinate()) == -1)
+                return false;
+                
+            switch(compass()){
+                case 3: return tryMove(-7);
+                case 4: return tryMove(-9);
+                case 6: return tryMove(-8);
+            }
+        }else{
+            if(cPos.getCoordinate().compareTo(nPos.getCoordinate()) == 1)
+                return false;
+                
+            switch(compass()){
+                case 1: return tryMove(9);
+                case 2: return tryMove(7);
+                case 5: return tryMove(8);
+            }
+        }
+        
+        return true;
     }
 
     //Trying catch failures and verifying cPos to nPos 
     //Try square by square until target
     @Override
     public boolean tryMove(int p){
-        return true;
+        newSquarePos = super.sumPosition(row, 0, p);
+
+        if(nPosInt == newSquarePos){
+            if(p != 8 && p != -8){
+                if(nPos.getChessman() == null)
+                    return false;
+                else{
+                    if(newSquarePos < 8 || newSquarePos > 55)
+                    Game.changePawn();
+                    return true;
+                }
+            }
+            if(p == 8 || p == -8){
+                if(nPos.getChessman() != null)
+                    return false;
+                if(newSquarePos < 8 || newSquarePos > 55)
+                    Game.changePawn();
+                return true;
+            }
+        }else if (row == 1 || row == 6)
+            if(p == 8 || p == -8){
+                newSquarePos = super.sumPosition(row, 0, p*2);
+                if(nPosInt == newSquarePos)
+                    return true;
+            }
+        return false;
     }
 }

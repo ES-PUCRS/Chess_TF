@@ -3,7 +3,7 @@ public class Knight extends ChessmanDefault {
     private BoardSquare shouldTry;  // BoardSquare that would catch by newSquarePos
 
     private int newSquarePos;       // New target between origin and new position
-    private int secSquarePos;
+    private int secSquarePos;       // Sec possible target  
     private int nPosInt;            // New position on integer
     private int cPosInt;            // Current position on integer
     private int row;                // Current row

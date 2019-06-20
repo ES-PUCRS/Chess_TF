@@ -51,7 +51,7 @@ public class Board extends GridPane{
     //Catch onAction event
     public void squareCatch(ActionEvent e) throws InputMismatchException{
         BoardSquare square = (BoardSquare) e.getSource();
-        if(Game.getProgramCounter() == 0 || Game.getProgramCounter() == 3)
+        if(Game.getProgramCounter() == 0 || Game.getProgramCounter() == 2)
             square.SquareSelect();
         else
             Game.setOnBoard(onBoard());

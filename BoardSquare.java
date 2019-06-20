@@ -34,7 +34,6 @@ public class BoardSquare extends Button{
     //Move the currently chessman to a new spot
     //@Param is the new place which the chessman will be moved.
     public void moveChessman(BoardSquare newSpot){
-        System.out.println("Move boardSquare");
         newSpot.moveChessman(chessman);
         chessman = null;
         setImg();
@@ -43,7 +42,6 @@ public class BoardSquare extends Button{
     //Replace the currently chessman by a new one
     //@Param is the new chessman that will stay at square;
     public void moveChessman(Chessman newPiece){
-        System.out.println("MoveChessman");
         chessman = newPiece;
         setImg();
     }

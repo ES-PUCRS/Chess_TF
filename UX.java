@@ -2,10 +2,12 @@
 //Java default API controls
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class UX extends Application{
@@ -16,20 +18,21 @@ public static final int lPy = 400;
 public static final int gPx = 600;
 public static final int gPy = 650;
 private static Picture picture;
+private static Stage secundaryStage;
 private Stage primaryStage;
 private Scene fitScene;
+private ScreenGx screen;
 
     public static void main(String args[]){
         launch(args);
-
-
     }
 
     @Override
     public void start(Stage primaryStage){
         this.primaryStage = primaryStage;
 
-        ScreenGx screen = new ScreenGx(primaryStage);
+        screen = ScreenGx.getInstance();
+        screen.setStage(primaryStage);
         
         picture = new Picture();
         picture.hold("MenuBackground");
@@ -40,14 +43,26 @@ private Scene fitScene;
         primaryStage.setResizable(false);
            
         controlStage(fitScene);
+        //controlStage(screen.MenuGx());
         controlStage(screen.GameGx());
         primaryStage.show(); 
+    }
+
+    public Stage getPrimaryStage(){ return primaryStage; }
+    public static Stage getSecondaryStage(){
+        if(secundaryStage == null){
+            secundaryStage = new Stage();
+            secundaryStage.initModality(Modality.APPLICATION_MODAL);
+            secundaryStage.initStyle(StageStyle.UNDECORATED);
+        }
+        return secundaryStage;
     }
 
     public void controlStage(Scene scene){
         controlStage(primaryStage, scene);
     }
-    public static void controlStage(Stage primaryStage, Scene scene){
+
+    public static void controlStage(Stage s, Scene scene){
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
             //Revifying return
@@ -58,11 +73,12 @@ private Scene fitScene;
         py = (int) scene.getHeight();
 
         //set Stage boundaries to the lower right corner of the visible bounds of the main screen
-        primaryStage.setX((primaryScreenBounds.getWidth() - px)/2);
-        primaryStage.setY((primaryScreenBounds.getHeight() - py)/2);
-        primaryStage.setWidth(px);
-        primaryStage.setHeight(py);
+        s.setX((primaryScreenBounds.getWidth() - px)/2);
+        s.setY((primaryScreenBounds.getHeight() - py)/2);
+        s.setWidth(px);
+        s.setHeight(py);
 
-        primaryStage.setScene(scene);
+        s.setScene(scene);
+        s.show();
     }
 }
