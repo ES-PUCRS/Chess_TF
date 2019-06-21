@@ -47,6 +47,7 @@ private static Map<String, Image> images;
         images.put("MenuBackground", new Image("file:Images\\BackgroundMenu.png"));
         images.put("Won", new Image("file:Images\\congrats.jpeg"));
         images.put("Board", new Image("file:Images\\Board.jpg"));
+        images.put("Icon", new Image("file:Images\\Icon.png"));
         images.put("null", new Image("file:Images\\Null.jpg"));
         
         //images.put("BoardSquare", new Image("file:Images\\BoardSquare.png"));

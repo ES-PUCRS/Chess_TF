@@ -65,9 +65,10 @@ public class Pawn extends ChessmanDefault {
             }
         }else if (row == 1 || row == 6)
             if(p == 8 || p == -8){
-                newSquarePos = super.sumPosition(row, 0, p*2);
-                if(nPosInt == newSquarePos)
-                    return true;
+                if(super.tryMoveNext(newSquarePos, nPosInt))
+                    newSquarePos = super.sumPosition(row, 0, p*2);
+                    if(newSquarePos == nPosInt)
+                        return true;
             }
         return false;
     }

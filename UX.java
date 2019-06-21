@@ -32,20 +32,18 @@ private ScreenGx screen;
     public void start(Stage primaryStage){
         this.primaryStage = primaryStage;
 
+        picture = new Picture("Icon");
         screen = ScreenGx.getInstance();
         screen.setStage(primaryStage);
-        
-        picture = new Picture();
-        picture.hold("MenuBackground");
 
         Group root = new Group();
         fitScene = new Scene(root, lPx, lPy);
         primaryStage.setTitle("Chess");
         primaryStage.setResizable(false);
-           
+        primaryStage.getIcons().add(picture.picture());
+        
         controlStage(fitScene);
         controlStage(screen.MenuGx());
-        //controlStage(screen.GameGx());
         primaryStage.show(); 
     }
 

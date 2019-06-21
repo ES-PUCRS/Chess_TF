@@ -37,7 +37,8 @@ public abstract class ChessmanDefault extends Chessman{
     public void setBoard(GridPane board){
         this.board = board;
     }
-
+    public GridPane getBoard(){ return board; }
+    
     //Override toString to make easyer to get Image/ImageView
     @Override
     public String toString(){
@@ -90,6 +91,10 @@ public abstract class ChessmanDefault extends Chessman{
     @Override
     public int sumPosition(int i, int k, int p){
         return (((i * SquareRows) + (cQ - k)) + p);
+    }
+    //Overload
+    public int sumPosition(int i, int c, int k, int p){
+        return (((i * SquareRows) + (c - k)) + p);
     }
 
     //Used to verify if the next possible movement is possible
