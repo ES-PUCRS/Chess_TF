@@ -42,8 +42,8 @@ public class AlertList{
         LeftGame.showAndWait().ifPresent(b ->{
             if(b == sure)
                 UX.controlStage(ScreenGx.getStage(), screen.MenuGx());
-            else if(b == saveBefore)
-                UX.controlStage(ScreenGx.getStage(), screen.Save());
+            //else if(b == saveBefore)
+                //UX.controlStage(ScreenGx.getStage(), screen.Save());
             else LeftGame.close();
         });
     }

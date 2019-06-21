@@ -53,9 +53,8 @@ public class Board extends GridPane{
         BoardSquare square = (BoardSquare) e.getSource();
         if(Game.getProgramCounter() == 0 || Game.getProgramCounter() == 2)
             square.SquareSelect();
-        else
-            Game.setOnBoard(onBoard());
             
+        Game.setOnBoard(onBoard());    
         Game.setPointer(square);
     }
 

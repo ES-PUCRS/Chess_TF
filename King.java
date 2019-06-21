@@ -1,14 +1,10 @@
 public class King extends ChessmanDefault {
     public final String type = "King";    //Chessman type
-    private BoardSquare shouldTry;  // BoardSquare that would catch by newSquarePos
 
     private int newSquarePos;       // New target between origin and new position
     private int cPosInt;            // Current position on integer
     private int nPosInt;            // New position on integer
-    private int column;             // Current Column
     private int row;                // Current Row
-    private int cQ;                 // Current quadrant
-    private int nQ;                 // New quadrant
 
 
     public King(Team team){
@@ -20,7 +16,6 @@ public class King extends ChessmanDefault {
     public boolean chessmanMovement(BoardSquare cPos, BoardSquare nPos){
         cPosInt = cPos.getCoordinate().getIntPos();
         nPosInt = nPos.getCoordinate().getIntPos();
-        column = cPos.getCoordinate().getColumn();
         row = cPos.getCoordinate().getRow();
         
         switch(compass()){

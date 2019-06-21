@@ -7,10 +7,10 @@ public class Game{
     private static int ProgramCounter = 0;
     private static BoardSquare fPos;
     private static BoardSquare sPos;
+    private static ScreenGx screen;
     private static boolean single;
     private static GridPane board;
     private static Game instance;
-    private static ScreenGx screen;
 
     private Game(){}    
 
@@ -24,9 +24,11 @@ public class Game{
         board = boardplay;
     }
 
+    public static GridPane getOnBoard() { return board; }
+
     //Get Board onAction event and deal with
     public static void setPointer(BoardSquare square) throws InputMismatchException{
-        System.out.println("ProgramCounter -> "+ProgramCounter);
+
         if(ProgramCounter == 0 || ProgramCounter == 2){
             fPos = square;
             GameRun();
@@ -57,26 +59,26 @@ public class Game{
                 throw new InputMismatchException("Selected chessman can not move to target.");
             }
         }
-
+        
+        if(single) ComputerPlayer.Play();
         if(ProgramCounter == 4){
             ProgramCounter = 0;
         }
-            System.out.println("\tFinal: "+ ProgramCounter);
     }
 
-        private static boolean rightPlayer(){
-            if(ProgramCounter == 0)
-                if(fPos.getChessman().getTeam() == Team.Black){
-                    posClear();
-                    throw new InputMismatchException("This is not your chessman.");
-                }
-            if(ProgramCounter == 2)
-                if(fPos.getChessman().getTeam() == Team.White){
-                    posClear();
-                    throw new InputMismatchException("This is not your chessman.");
-                }
-            return true;
-        }
+    private static boolean rightPlayer(){
+        if(ProgramCounter == 0)
+            if(fPos.getChessman().getTeam() == Team.Black){
+                posClear();
+                throw new InputMismatchException("This is not your chessman.");
+            }
+        if(ProgramCounter == 2)
+            if(fPos.getChessman().getTeam() == Team.White){
+                posClear();
+                throw new InputMismatchException("This is not your chessman.");
+            }
+        return true;
+    }
 
 
     public static int getProgramCounter(){ return ProgramCounter; }
@@ -104,7 +106,17 @@ public class Game{
                 throw new InputMismatchException("Can not move to a same team chessman position.");
             }
         }
-        return cPos.getChessman().MoveFx(cPos, nPos, board);
+        
+        if(cPos.getChessman().MoveFx(cPos, nPos, board)){
+            if(nPos.getChessman() != null && nPos.getChessman().getType() == "King"){
+                screen = ScreenGx.getInstance();
+                UX.controlStage(UX.getWonStage(), screen.wonScreen());
+                return true;
+            }else
+                return true;
+        }
+
+        return false;
     }
 
     private static void posClear(){
@@ -119,8 +131,10 @@ public class Game{
     }
 
     public static void changePawn(){
-        screen = ScreenGx.getInstance();
-        UX.controlStage(UX.getSecondaryStage(), screen.changePawn(sPos));
+        if(sPos.getChessman().getType() != "King"){
+            screen = ScreenGx.getInstance();
+            UX.controlStage(UX.getSecondaryStage(), screen.changePawn(sPos));
+        }
     }
 
     //Set single or multiplayer type game
@@ -149,6 +163,7 @@ public class Game{
 
     //Create all chessmen
     private static Chessman iniPosPiece(int pos){
+        ProgramCounter = 0;
         if(pos >= 8 && pos <=15 || pos >= 48 && pos <= 55)
             return new Pawn(iniPosTeam(pos));
         else if(pos == 0 || pos == 7 || pos == 56 || pos == 63)

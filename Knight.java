@@ -1,11 +1,9 @@
 public class Knight extends ChessmanDefault {
     public final String type = "Knight";    //Chessman type
-    private BoardSquare shouldTry;  // BoardSquare that would catch by newSquarePos
 
     private int newSquarePos;       // New target between origin and new position
     private int secSquarePos;       // Sec possible target  
     private int nPosInt;            // New position on integer
-    private int cPosInt;            // Current position on integer
     private int row;                // Current row
 
 
@@ -16,7 +14,6 @@ public class Knight extends ChessmanDefault {
     @Override 
     public boolean chessmanMovement(BoardSquare cPos, BoardSquare nPos){
         nPosInt = nPos.getCoordinate().getIntPos();
-        cPosInt = cPos.getCoordinate().getIntPos();
         row = cPos.getCoordinate().getRow();
         
         switch(compass()){

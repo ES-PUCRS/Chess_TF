@@ -21,7 +21,6 @@ public class ScreenGx {
     public static final int gPyBorded = UX.gPy - 58;
     private static ScreenGx instance;
     private static Stage s;
-    private static Stage st;
 
     private static Scene changePawn;
     //private static Scene save;
@@ -91,14 +90,16 @@ public class ScreenGx {
         vb.getChildren().add(multiPlay);
         grid.add(hb, 0, 0);
         grid.add(vb, 0, 1);
-
+        /*
         singlePlay.setOnAction(e -> {
-            Game game = Game.getInstance();
-            game.setPlayType(true);
+            Game.setPlayType(true);
             UX.controlStage(s, Select());
         });
-        // multiPlay.setOnAction(e -> UX.controlStage(multiplayerGame));
-
+        */
+        multiPlay.setOnAction(e -> {
+            Game.setPlayType(false);
+            UX.controlStage(s, Select());
+        });
         Scene menu = new Scene(gridMaster, UX.lPx, UX.lPy);
         return menu;
     }
@@ -179,7 +180,7 @@ public class ScreenGx {
         menuGame.getItems().addAll(save, load, menu);
         menuBar.getMenus().addAll(menuGame);
 
-        save.setOnAction(e -> UX.controlStage(s, Save()));
+        // save.setOnAction(e -> UX.controlStage(s, Save()));
         // load.setOnAction(e -> controlStage(screenSave()));
         menu.setOnAction(e -> alert.LeftGame());
 
@@ -190,6 +191,28 @@ public class ScreenGx {
         Scene game = new Scene(gridMaster, UX.gPx, UX.gPy);
         return game;
     }
+
+
+    public Scene wonScreen() {
+        Picture picture = new Picture("Won");
+        GridPane gridMaster = new GridPane();
+        Button ok = new Button("Back to menu");
+
+        ok.setOnAction(e -> {
+            UX.controlStage(s, MenuGx());
+            UX.getWonStage().close();
+        });
+
+        VBox vb = new VBox();
+        vb.setAlignment(Pos.BOTTOM_CENTER);
+        vb.getChildren().addAll(ok);
+
+        gridMaster.add(picture.getView(500, 200),0,0);
+        gridMaster.add(vb,0,0);
+        Scene won = new Scene(gridMaster, 500, 200);
+        return won;
+    }
+
 
 
     private static Stage secondaryStage;

@@ -19,6 +19,7 @@ public static final int gPx = 600;
 public static final int gPy = 650;
 private static Picture picture;
 private static Stage secundaryStage;
+private static Stage wonStage;
 private Stage primaryStage;
 private Scene fitScene;
 private ScreenGx screen;
@@ -43,8 +44,8 @@ private ScreenGx screen;
         primaryStage.setResizable(false);
            
         controlStage(fitScene);
-        //controlStage(screen.MenuGx());
-        controlStage(screen.GameGx());
+        controlStage(screen.MenuGx());
+        //controlStage(screen.GameGx());
         primaryStage.show(); 
     }
 
@@ -56,6 +57,14 @@ private ScreenGx screen;
             secundaryStage.initStyle(StageStyle.UNDECORATED);
         }
         return secundaryStage;
+    }
+    public static Stage getWonStage(){
+        if(wonStage == null){
+            wonStage = new Stage();
+            wonStage.initModality(Modality.APPLICATION_MODAL);
+            wonStage.initStyle(StageStyle.UNDECORATED);
+        }
+        return wonStage;
     }
 
     public void controlStage(Scene scene){

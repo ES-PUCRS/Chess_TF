@@ -60,7 +60,7 @@ public class Pawn extends ChessmanDefault {
                 if(nPos.getChessman() != null)
                     return false;
                 if(newSquarePos < 8 || newSquarePos > 55)
-                    Game.changePawn();
+                        Game.changePawn();
                 return true;
             }
         }else if (row == 1 || row == 6)
