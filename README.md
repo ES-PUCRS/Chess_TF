@@ -14,7 +14,7 @@ Cavalo (Knight) = Move-se por duas colunas e uma linha ou o inverso, não se afe
 Bispo (Bishop) = Move-se paralelamente igual entre linhas e colunas, não podendo ter outra peça em seu caminho;
 Rainha (Queen) = Seu movimento é caracterizado pelo Bispo e pela Torre, podendo assumir qualquer um dos dois; 
 Rei (King) = A peça mais importante do jogo, caso derrotada, o jogador perde. A mesma não pode assumir uma posição que lhe deixe a menos de um bloco de distância do rei inimigo.
---* Movimentos especiais como Rock não estão implementados nesse jogo *--
+* Movimentos especiais como Rock não estão implementados nesse jogo *
 
 
 ## Estrutura de classes
@@ -35,12 +35,11 @@ O diagrama de classes pode ser encontrado junto a este arquivo.
 - Pawn: Estende ChessmanDefault. Também chama a classe Class para criar a tela de troca de peça;
 - King: Estende ChessmanDefault;
 - Movements: Classe Abstrata que estende ChessmanDefault e sobrescreve os métodos de movimento padrões para Rainha, Bispo e Torre;
-- Rainha, Bispo, Torre: Estende Movements, indica para onde deve ser testado e aponta valor "p" do calculo para a classe pai.
+- Rainha, Bispo, Torre: Estendem Movements, indicam para onde deve ser testado e aponta valor "p" do calculo para a classe pai. *Valor "P" presente em comentário acima do método tryMove na classe Moviments*
 
 
 ## Instruções para compilar e executar o projeto
-1. Extraia o .zip;
-2. Entre no diretório resultante da extração;
-3. Abra o terminal (Win+R);
-4. Compile o projeto utilizando o comando "javac *.java";
-5. Para rodar o projeto utilize o comando "java UX".
+1. Entre no diretório do projeto;
+2. Abra o terminal;
+3. Compile o projeto utilizando o comando "javac *.java";
+4. Para rodar o projeto utilize o comando "java UX".
