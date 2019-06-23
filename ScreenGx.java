@@ -23,9 +23,6 @@ public class ScreenGx {
     private static Stage s;
 
     private static Scene changePawn;
-    //private static Scene save;
-    //private static Scene
-    //private static Scene
 
     private GridPane gridMaster;
     private GridPane Background;
@@ -90,12 +87,14 @@ public class ScreenGx {
         vb.getChildren().add(multiPlay);
         grid.add(hb, 0, 0);
         grid.add(vb, 0, 1);
+
         /*
         singlePlay.setOnAction(e -> {
             Game.setPlayType(true);
             UX.controlStage(s, Select());
         });
         */
+        
         multiPlay.setOnAction(e -> {
             Game.setPlayType(false);
             UX.controlStage(s, Select());

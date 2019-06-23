@@ -60,7 +60,7 @@ public class Game{
             }
         }
         
-        if(single) ComputerPlayer.Play();
+        //if(single) ComputerPlayer.Play();
         if(ProgramCounter == 4){
             ProgramCounter = 0;
         }
