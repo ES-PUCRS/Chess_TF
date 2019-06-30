@@ -1,6 +1,6 @@
 # Trabalho final de P.O.O. 1/2019
 Trabalho final da disciplina de programação orientada a objetos
-Ministrado pelo professor Bernardo Copstein
+ministrado pelo professor Bernardo Copstein
 
 # Chess_TF
 ## Objetivo geral
