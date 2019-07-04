@@ -47,6 +47,8 @@ public class Pawn extends ChessmanDefault {
         newSquarePos = super.sumPosition(row, 0, p);
 
         if(nPosInt == newSquarePos){
+            
+            //Diagonally
             if(p != 8 && p != -8){
                 if(nPos.getChessman() == null)
                     return false;
@@ -56,6 +58,8 @@ public class Pawn extends ChessmanDefault {
                     return true;
                 }
             }
+            
+            //Forward, backward
             if(p == 8 || p == -8){
                 if(nPos.getChessman() != null)
                     return false;
@@ -63,6 +67,8 @@ public class Pawn extends ChessmanDefault {
                         Game.changePawn();
                 return true;
             }
+            
+            //first move -> 2 square
         }else if (row == 1 || row == 6)
             if(p == 8 || p == -8){
                 if(super.tryMoveNext(newSquarePos, nPosInt))
