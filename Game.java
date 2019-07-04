@@ -131,7 +131,7 @@ public class Game{
     }
 
     public static void changePawn(){
-        if(sPos.getChessman().getType() != "King"){
+        if(sPos.getChessman() == null || sPos.getChessman().getType() != "King"){
             screen = ScreenGx.getInstance();
             UX.controlStage(UX.getSecondaryStage(), screen.changePawn(sPos));
         }
