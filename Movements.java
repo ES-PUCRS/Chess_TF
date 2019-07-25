@@ -120,13 +120,13 @@ public abstract class Movements extends ChessmanDefault{
      *                                          +--------------------+--------------------+
      * 
      * 
-     *          7-c                                  7-i
+     *              7-c                              7-i
      *  x1 → 1 * k + Σ  (i * 8) + c  \/  x2 → 8 * k + Σ  (i * 8) + c  ⇔  cPos < nPos 
-     *          k=0                                  k=0
+     *              k=0                              k=0
      * 
-     *            c                                     i
+     *                c                                 i
      *  x1 → -1 * k + Σ  (i * 8) + c  \/  x2 → -8 * k + Σ  (i * 8) + c  ⇔  cPos > nPos 
-     *          i,k=0                                  k=0
+     *              i,k=0                              k=0
      * 
      */
     public boolean tryMovePlus(int p){
