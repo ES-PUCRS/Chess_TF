@@ -72,7 +72,6 @@ public class King extends ChessmanDefault {
             }
             
             newSquarePos = super.sumPosition(nPos.getCoordinate().getRow(), nPos.getCoordinate().getColumn(), 0, p);
-            System.out.println("newSquarePos "+p+" -> "+newSquarePos);
             if(newSquarePos < 0 || newSquarePos > 63)
                 continue;
             shouldTry = (BoardSquare) getBoard().getChildren().get(newSquarePos);
@@ -81,8 +80,6 @@ public class King extends ChessmanDefault {
                     shouldTry.getChessman().getType().equals("King"))
                     return false;
         }
-
-        System.out.println("true");
         return true;
     }
 }
